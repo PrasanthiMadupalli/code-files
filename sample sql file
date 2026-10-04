@@ -1,0 +1,67 @@
+-- tfi_heroes.sql
+-- Sample database of TFI (Telugu Film Industry) heroes
+-- Remuneration figures are approximate/sample values in INR crores.
+
+CREATE DATABASE IF NOT EXISTS tfi_database;
+
+USE tfi_database;
+
+DROP TABLE IF EXISTS tfi_heroes;
+
+CREATE TABLE tfi_heroes (
+    hero_id INT PRIMARY KEY AUTO_INCREMENT,
+    hero_name VARCHAR(100) NOT NULL,
+    remuneration_crores DECIMAL(10,2),
+    debut_year INT,
+    popular_movie VARCHAR(150)
+);
+
+INSERT INTO tfi_heroes
+    (hero_name, remuneration_crores, debut_year, popular_movie)
+VALUES
+    ('Prabhas', 100.00, 2002, 'Baahubali'),
+    ('Allu Arjun', 100.00, 2003, 'Pushpa: The Rise'),
+    ('Mahesh Babu', 80.00, 1999, 'Srimanthudu'),
+    ('Jr. NTR', 60.00, 2001, 'RRR'),
+    ('Ram Charan', 50.00, 2007, 'RRR'),
+    ('Pawan Kalyan', 50.00, 1996, 'Gabbar Singh'),
+    ('Chiranjeevi', 50.00, 1978, 'Sye Raa Narasimha Reddy'),
+    ('Nani', 25.00, 2008, 'Dasara'),
+    ('Vijay Deverakonda', 20.00, 2011, 'Arjun Reddy'),
+    ('Ravi Teja', 18.00, 1990, 'Dhamaka'),
+    ('Adivi Sesh', 15.00, 2010, 'Major'),
+    ('Sharwanand', 12.00, 2004, 'Mahanubhavudu');
+
+-- Display all heroes
+SELECT * FROM tfi_heroes;
+
+-- Display heroes in descending order of remuneration
+SELECT
+    hero_name,
+    remuneration_crores
+FROM tfi_heroes
+ORDER BY remuneration_crores DESC;
+
+-- Find heroes earning more than ₹50 crore
+SELECT
+    hero_name,
+    remuneration_crores
+FROM tfi_heroes
+WHERE remuneration_crores > 50;
+
+-- Find the highest-paid hero
+SELECT
+    hero_name,
+    remuneration_crores
+FROM tfi_heroes
+ORDER BY remuneration_crores DESC
+LIMIT 1;
+
+-- Calculate the average remuneration
+SELECT
+    ROUND(AVG(remuneration_crores), 2) AS average_remuneration_crores
+FROM tfi_heroes;
+
+-- Count the number of heroes
+SELECT COUNT(*) AS total_heroes
+FROM tfi_heroes;
