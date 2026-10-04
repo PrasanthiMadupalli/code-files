@@ -1,0 +1,12 @@
+FROM httpd:2.4-alpine
+RUN rm -rf /usr/local/apache2/htdocs/*
+COPY index.html /usr/local/apache2/htdocs
+EXPOSE 80
+RUN chown -R daemon:daemon /usr/local/apache2/htdocs
+USER daemon
+CMD ["httpd-foreground"]
+
+
+RUN adduser user1
+RUN chown -R user1:user1 /usr/local/apache2/htdocs
+USER user1
